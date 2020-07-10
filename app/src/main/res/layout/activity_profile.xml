@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             tools:text="Navya Garg"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email:"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textSize="18sp"/>
 
@@ -52,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone Number:"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textSize="18sp"/>
 
@@ -66,4 +69,17 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button_style"
+        android:text="Edit Profile"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="#fff"
+        android:layout_marginBottom="20dp"/>
 </RelativeLayout>
