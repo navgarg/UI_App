@@ -79,12 +79,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="17dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginRight="15dp"
                     android:elevation="20dp"
-                    android:src="@mipmap/arrow_right" />
+                    android:src="@drawable/ic_pie_chart" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -134,12 +135,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="17dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginRight="15dp"
                     android:elevation="20dp"
-                    android:src="@mipmap/arrow_right" />
+                    android:src="@drawable/ic_recent_transactions" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -167,7 +169,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="17dp"
-                    android:layout_marginLeft="85dp"
+                    android:layout_marginLeft="84dp"
                     android:elevation="20dp"
                     android:src="@mipmap/arrow_right" />
 
@@ -192,12 +194,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="17dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginRight="15dp"
                     android:elevation="20dp"
-                    android:src="@mipmap/arrow_right" />
+                    android:src="@drawable/ic_promotions" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -225,7 +228,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="17dp"
-                    android:layout_marginLeft="110dp"
+                    android:layout_marginLeft="111dp"
                     android:elevation="20dp"
                     android:src="@mipmap/arrow_right" />
 
@@ -243,12 +246,13 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginRight="15dp"
                 android:elevation="20dp"
-                android:src="@mipmap/arrow_right" />
+                android:src="@drawable/ic_refer" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -285,56 +289,50 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="40dp"
-        android:layout_marginLeft="60dp"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="35dp"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_schedule_payment"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_schedule_payment" />
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <TextView
-                android:gravity="bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="bottom"
                 android:text="Schedule Payment"
                 android:textColor="#fff"
-                android:textStyle="bold"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:gravity="top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="top"
                 android:text="Set a payment\nschedule"
                 android:textColor="#eee"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/toggle_menu"-->
-<!--            android:background="@color/colorPrimary"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@mipmap/toggle"/>-->
-
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"/>
+                <ImageView
+                    android:id="@+id/toggle_menu"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginLeft="75dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/toggle"/>
 
     </LinearLayout>
 
@@ -348,6 +346,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textColor="#000"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="40dp"/>
 
 </LinearLayout>
