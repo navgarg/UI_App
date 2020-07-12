@@ -87,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="210dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -140,7 +141,7 @@
                     android:id="@+id/image"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:src="@drawable/ic_duration"
                     android:layout_toLeftOf="@+id/dur"
@@ -167,89 +168,104 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 <fragment
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="360dp"
+    android:layout_height="0dp"
+    android:layout_weight="2"
     tools:context=".RideActivity" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         card_view:cardCornerRadius="100px">
 
-
-        <TableRow
-            android:layout_width="20dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="#bfbfbf" />
-
-        <TableRow
-            android:layout_width="20dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="#bfbfbf" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_profile"
-                android:layout_weight="2"/>
+            <TableRow
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="#bfbfbf" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:text="Ruth Crawford"
-            android:textSize="20sp"
-            android:textColor="#000"/>
-            
+            <TableRow
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="#bfbfbf" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:src="@drawable/ic_profile" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="Ruth Crawford"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="4.80"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_star_border" />
+
+            </LinearLayout>
+
             <TextView
-                android:layout_width="0dp"
+                android:layout_above="@+id/trip_img"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.80"
-                android:gravity="right"
-                android:layout_gravity="center"
-                android:textSize="22sp"
-                android:textColor="#000"
-                android:layout_weight="1"/>
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Trip Details"/>
 
             <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_star_border"/>
+                android:id="@+id/trip_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_arrow_drop_down"/>
 
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="130dp"
-            android:gravity="center"
-            android:text="Trip Details"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_arrow_drop_down"
-            android:layout_marginTop="140dp"/>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 </LinearLayout>
