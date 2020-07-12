@@ -166,6 +166,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/ride"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="17dp"
