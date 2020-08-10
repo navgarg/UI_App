@@ -30,10 +30,6 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Ride>> {
 
-    private static final int LOADER_ID = 1;
-    private static final String REQUEST_URL =
-            "https://thzpf4wmki.execute-api.us-west-2.amazonaws.com/Dev/trip-earning";
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,58 +64,27 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if(networkInfo != null && networkInfo.isConnected()) {
 
-            getLoaderManager().initLoader(LOADER_ID, null, (android.app.LoaderManager.LoaderCallbacks<Object>) this);
+//            getLoaderManager().initLoader(1, null, (android.app.LoaderManager.LoaderCallbacks<Object>) this);
 
         }else {
             Toast.makeText(MenuActivity.this, "No network found", Toast.LENGTH_LONG).show();
         }
 
-        TextView earnings = findViewById(R.id.earnings_month);
-
+        TextView earnings = findViewById(R.id.earnings_month_act_menu);
 
     }
 
     @NonNull
     @Override
     public Loader<List<Ride>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new RideLoader(this, REQUEST_URL);
+        return null;
     }
-
     @Override
     public void onLoadFinished(@NonNull Loader<List<Ride>> loader, List<Ride> data) {
 
     }
-
     @Override
     public void onLoaderReset(@NonNull Loader<List<Ride>> loader) {
-
-    }
-
-    public class RideLoader extends AsyncTaskLoader<List<Ride>> {
-
-        private String[] mURLs;
-
-        public RideLoader(Context context, String... urls) {
-            super(context);
-            mURLs = urls;
-        }
-
-        @Override
-        protected void onStartLoading() {
-            forceLoad();
-        }
-
-        @Override
-        public List<Ride> loadInBackground() {
-            if (mURLs.length < 1 || mURLs[0] == null) {
-                return null;
-            }
-
-            List<Ride> result = QueryUtils.fetchRideData(mURLs[0]);
-            return result;
-
-        }
-
 
     }
 }

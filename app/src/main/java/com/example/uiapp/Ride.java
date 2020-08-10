@@ -1,18 +1,33 @@
 package com.example.uiapp;
 
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@DynamoDBTable(tableName = "TripEarnings")
 public class Ride {
 
+    @DynamoDBHashKey(attributeName = "Trip_ID")
+    private int mRideId;
+    @DynamoDBAttribute(attributeName = "Trip_Earning")
     private int mEarning;
+    @DynamoDBAttribute(attributeName = "Trip_Distance")
     private int mDistance;
-    private long mDuration;
+    @DynamoDBAttribute(attributeName = "Trip_Duration")
+    private String mDuration;
+    @DynamoDBAttribute(attributeName = "Trip_Month")
     private String mMonth;
-
-    public Ride(int earning, int distance, long duration, String month){
-        mEarning = earning;
-        mDistance = distance;
-        mDuration = duration;
-        mMonth = month;
-    }
+    @DynamoDBAttribute(attributeName = "User_ID")
+    private String mUserId;
 
     public int getEarning() {
         return mEarning;
@@ -30,11 +45,11 @@ public class Ride {
         this.mDistance = mDistance;
     }
 
-    public long getDuration() {
+    public String getDuration() {
         return mDuration;
     }
 
-    public void setDuration(int mDuration) {
+    public void setDuration(String mDuration) {
         this.mDuration = mDuration;
     }
 
@@ -45,4 +60,22 @@ public class Ride {
     public void setMonth(String mMonth) {
         this.mMonth = mMonth;
     }
+
+    public int getRideId() {
+        return mRideId;
+    }
+
+    public void setRideId(int mRideId) {
+        this.mRideId = mRideId;
+    }
+
+
+    public String getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(String nUserId) {
+        this.mUserId = mUserId;
+    }
+
 }

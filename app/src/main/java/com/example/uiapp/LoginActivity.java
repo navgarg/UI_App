@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+import timber.log.Timber;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText mEmailEditText;
@@ -49,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
                     startActivity(new Intent(LoginActivity.this, MenuActivity.class));
-                    Log.d("LoginActivity", "Intent sent");
+                    Log.d("LoginActivity","Intent sent");
+                    Log.d("LoginActivity", "User: " + firebaseAuth.getCurrentUser().getUid());
+                    //E0VJnE0YitPFQhy25F3efPD1PXt2 or toRxbISL5Ech49y8bMASjGol5ij1
                     finish();
                 }
             }
