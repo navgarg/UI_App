@@ -72,16 +72,16 @@ public class MenuActivity extends AppCompatActivity{
 
         TextView earnings_menu = findViewById(R.id.earnings_month_act_menu);
         TextView earnings_earn = findViewById(R.id.earnings_month_act_earning);
-        DDB ddb = new DDB(this);
-        List<Ride> rides = ddb.read();
-        int earning = 0;
-        for (Ride ride : rides) {
-            if(ride.getMonth() == "August"){
-                earning += ride.getEarning();
-            }
-        }
-        earnings_menu.setText(Integer.toString(earning));
-        earnings_earn.setText(Integer.toString(earning));
+//        DDB ddb = new DDB(this);
+//        List<Ride> rides = ddb.read();
+//        int earning = 0;
+//        for (Ride ride : rides) {
+//            if(ride.getMonth() == "August"){
+//                earning += ride.getEarning();
+//            }
+////        }
+//        earnings_menu.setText(Integer.toString(earning));
+//        earnings_earn.setText(Integer.toString(earning));
     }
 
 }
