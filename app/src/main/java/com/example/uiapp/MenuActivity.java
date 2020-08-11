@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class MenuActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Ride>> {
+public class MenuActivity extends AppCompatActivity{
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -39,8 +39,8 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
         ImageView toggle = findViewById(R.id.toggle_menu);
         toggle.setElevation(0);
 
-        ImageView earning = findViewById(R.id.earning);
-        earning.setOnClickListener(new View.OnClickListener() {
+        ImageView earning_img = findViewById(R.id.earning);
+        earning_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MenuActivity.this, EarningsActivity.class));
@@ -71,20 +71,16 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         TextView earnings = findViewById(R.id.earnings_month_act_menu);
+        DDB ddb = new DDB(this);
+        List<Ride> rides = ddb.read();
+        int earning = 0;
+        for (Ride ride : rides) {
+            if(ride.getMonth() == "August"){
+                earning += ride.getEarning();
+            }
+        }
+        earnings.setText(Integer.toString(earning));
 
     }
 
-    @NonNull
-    @Override
-    public Loader<List<Ride>> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
-    }
-    @Override
-    public void onLoadFinished(@NonNull Loader<List<Ride>> loader, List<Ride> data) {
-
-    }
-    @Override
-    public void onLoaderReset(@NonNull Loader<List<Ride>> loader) {
-
-    }
 }
