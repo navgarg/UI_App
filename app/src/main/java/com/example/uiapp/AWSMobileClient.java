@@ -97,7 +97,7 @@ public class AWSMobileClient {
             final AWSMobileClient awsClient =
                     new AWSMobileClient.Builder(context)
                             .withCognitoRegion(Regions.DEFAULT_REGION)
-//                            .withCognitoIdentityPoolID(AWSConfiguration.AMAZON_COGNITO_IDENTITY_POOL_ID)
+                            .withCognitoIdentityPoolID("")
                             .withIdentityManager(identityManager)
                             .withClientConfiguration(clientConfig)
                             .build();

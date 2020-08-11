@@ -70,7 +70,8 @@ public class MenuActivity extends AppCompatActivity{
             Toast.makeText(MenuActivity.this, "No network found", Toast.LENGTH_LONG).show();
         }
 
-        TextView earnings = findViewById(R.id.earnings_month_act_menu);
+        TextView earnings_menu = findViewById(R.id.earnings_month_act_menu);
+        TextView earnings_earn = findViewById(R.id.earnings_month_act_earning);
         DDB ddb = new DDB(this);
         List<Ride> rides = ddb.read();
         int earning = 0;
@@ -79,8 +80,8 @@ public class MenuActivity extends AppCompatActivity{
                 earning += ride.getEarning();
             }
         }
-        earnings.setText(Integer.toString(earning));
-
+        earnings_menu.setText(Integer.toString(earning));
+        earnings_earn.setText(Integer.toString(earning));
     }
 
 }
