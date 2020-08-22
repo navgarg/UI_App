@@ -1,33 +1,22 @@
 package com.example.uiapp;
 
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@DynamoDBTable(tableName = "TripEarnings")
 public class Ride {
 
-    @DynamoDBHashKey(attributeName = "Trip_ID")
     private int mRideId;
-    @DynamoDBAttribute(attributeName = "Trip_Earning")
     private int mEarning;
-    @DynamoDBAttribute(attributeName = "Trip_Distance")
     private int mDistance;
-    @DynamoDBAttribute(attributeName = "Trip_Duration")
     private String mDuration;
-    @DynamoDBAttribute(attributeName = "Trip_Month")
     private String mMonth;
-    @DynamoDBAttribute(attributeName = "User_ID")
     private String mUserId;
+
+    public Ride(int earning, int distance, String duration, String month, String uid, int rideid) {
+        mRideId = rideid;
+        mEarning = earning;
+        mDuration = duration;
+        mDistance = distance;
+        mUserId = uid;
+        mMonth = month;
+    }
 
     public int getEarning() {
         return mEarning;

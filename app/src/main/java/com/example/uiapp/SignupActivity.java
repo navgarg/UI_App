@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        Button signup = findViewById(R.id.signup);
+        Button signup = findViewById(R.id.sign_up_act_signup);
 
         final EditText email = findViewById(R.id.email_edit_text);
         final EditText pass = findViewById(R.id.pass_edit_text);
@@ -31,12 +32,15 @@ public class SignupActivity extends AppCompatActivity {
                 if(!email.getText().toString().equals("")
                         & !pass.getText().toString().equals(""))
                 {
+                    Log.d("SignupActivity", "in if statement");
                     final FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
                             .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Log.d("SignupActivity", "signup complete");
                                     if (task.isSuccessful()) {
+                                        Log.d("SignupActivity", "Signup successful");
                                         Toast.makeText(SignupActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(SignupActivity.this, MenuActivity.class));
                                     } else {

@@ -34,7 +34,7 @@
         tools:layout_editor_absoluteY="104dp" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/sign_up_act_signup"
         android:layout_margin="16dp"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
