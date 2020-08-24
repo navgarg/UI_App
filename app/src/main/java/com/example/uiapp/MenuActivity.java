@@ -19,7 +19,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -56,11 +67,35 @@ public class MenuActivity extends AppCompatActivity {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+//
+//        if(networkInfo != null && networkInfo.isConnected()) {
+//            //getLoaderManager().initLoader(LOADER_ID, null, );
+//        }else {
+//            Toast.makeText(MenuActivity.this, "No network found", Toast.LENGTH_LONG).show();
+//        }
 
-        if(networkInfo != null && networkInfo.isConnected()) {
-            //getLoaderManager().initLoader(LOADER_ID, null, );
-        }else {
-            Toast.makeText(MenuActivity.this, "No network found", Toast.LENGTH_LONG).show();
-        }
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        final String url = "http://httpbin.org/get?param1=hello";
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Response: ", response.toString());
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error: ", String.valueOf(error));
+                    }
+                }
+        );
+
+// add it to the RequestQueue
+        requestQueue.add(getRequest);
     }
 }
