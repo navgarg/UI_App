@@ -6,16 +6,16 @@ public class Ride {
     private int mEarning;
     private int mDistance;
     private String mDuration;
-    private String mMonth;
+    private String mDatetime;
     private String mUserId;
 
-    public Ride(int earning, int distance, String duration, String month, String uid, int rideid) {
+    public Ride(int earning, int distance, String duration, String datetime, String uid, int rideid) {
         mRideId = rideid;
         mEarning = earning;
         mDuration = duration;
         mDistance = distance;
         mUserId = uid;
-        mMonth = month;
+        mDatetime = datetime;
     }
 
     public int getEarning() {
@@ -42,12 +42,12 @@ public class Ride {
         this.mDuration = mDuration;
     }
 
-    public String getMonth() {
-        return mMonth;
+    public String getDatetime() {
+        return mDatetime;
     }
 
-    public void setMonth(String mMonth) {
-        this.mMonth = mMonth;
+    public void setDatetime(String datetime) {
+        this.mDatetime = datetime;
     }
 
     public int getRideId() {
