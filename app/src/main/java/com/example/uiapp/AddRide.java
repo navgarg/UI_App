@@ -6,6 +6,10 @@ import androidx.loader.content.AsyncTaskLoader;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,18 +19,82 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class AddRide extends AppCompatActivity {
+
+    int int_random;
+    String currDate;
+    String distance = "", earning = "", duration = "";
+    final String url = "https://ysv7zypxt5.execute-api.us-west-2.amazonaws.com/dev/rides";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ride);
+
+        Random rand = new Random();
+        int upper = 10000;
+        int_random = rand.nextInt(upper);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        currDate = sdf.format(new Date());
+
+        EditText dist = findViewById(R.id.edit_text_dist);
+        EditText dur = findViewById(R.id.edit_text_dur);
+        EditText earn = findViewById(R.id.edit_text_earn);
+
+        distance = dist.getText().toString();
+        earning = earn.getText().toString();
+        duration = dur.getText().toString();
+
+        Button post = findViewById(R.id.post);
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!(distance.equals("")) && !(earning.equals("")) && !(duration.equals(""))){
+                    //TODO: kick off loader
+                    RideLoader loader = new RideLoader(AddRide.this);
+                    loader.loadInBackground();
+                }
+                else{
+                    Toast.makeText(AddRide.this, "Fill all fields", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        Button delete = findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RequestQueue queue = Volley.newRequestQueue(AddRide.this);
+                StringRequest dr = new StringRequest(Request.Method.DELETE, url,
+                        new Response.Listener<String>()
+                        {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("Response", response);
+                            }
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Error.Response", String.valueOf(error));
+                            }
+                        }
+                );
+                queue.add(dr);
+            }
+        });
 
 
 
@@ -45,25 +113,6 @@ public class AddRide extends AppCompatActivity {
         @Override
         public Void loadInBackground() {
             RequestQueue queue = Volley.newRequestQueue(AddRide.this);
-            final String url = "https://ysv7zypxt5.execute-api.us-west-2.amazonaws.com/dev/rides?user_id=E0VJnE0YitPFQhy25F3efPD1PXt2&datetime=2020-07-15";
-
-            JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>()
-                    {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("Response: ", String.valueOf(response));
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Response: ", String.valueOf(error));
-                        }
-                    }
-            );
-            queue.add(getRequest);
 
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>()
@@ -84,14 +133,12 @@ public class AddRide extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put("Trip_ID", "10");
-                    params.put("User_ID", "E0VJnE0YitPFQhy25F3efPD1PXt2");
-                    params.put("Trip_Distance", "7");
-                    params.put("Trip_Earning", "50000");
-                    params.put("Trip_Month", "August");
-                    params.put("Trip_Duration", "4h 50m");
-
-
+                    params.put("trip_id", Integer.toString(int_random));
+                    params.put("user_id", FirebaseAuth.getInstance().getUid());
+                    params.put("distance", distance);
+                    params.put("earning", earning);
+                    params.put("datetime", currDate);
+                    params.put("duration", duration);
                     return super.getParams();
                 }
 
@@ -103,55 +150,6 @@ public class AddRide extends AppCompatActivity {
                 }
             };
             queue.add(postRequest);
-
-            StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
-                    new Response.Listener<String>()
-                    {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.d("Response", response);
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Error.Response", String.valueOf(error));
-                        }
-                    }
-            ) {
-
-                @Override
-                protected Map<String, String> getParams()
-                {
-                    Map<String, String>  params = new HashMap<String, String>();
-                    params.put("name", "Alif");
-                    params.put("domain", "http://itsalif.info");
-
-                    return params;
-                }
-
-            };
-
-            queue.add(putRequest);
-
-            StringRequest dr = new StringRequest(Request.Method.DELETE, url,
-                    new Response.Listener<String>()
-                    {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.d("Response", response);
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Error.Response", String.valueOf(error));
-                        }
-                    }
-            );
-            queue.add(dr);
             return null;
         }
     }

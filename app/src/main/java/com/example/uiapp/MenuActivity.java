@@ -9,6 +9,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,6 +53,10 @@ import java.util.Map;
 
 public class MenuActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Ride>> {
 
+    String currDate;
+    TextView earning_tv_menu;
+    TextView earning_tv_earn;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +65,11 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Log.d("MainActivity", "in onCreate");
 
-        Date currentTime = Calendar.getInstance().getTime();
-        Log.d("Date", String.valueOf(currentTime));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        currDate = sdf.format(new Date());
 
-        Time today = new Time(Time.getCurrentTimezone());
-        today.setToNow();
+        Log.d("user_id", FirebaseAuth.getInstance().getUid() + "");
 
-        Log.d("Date", String.valueOf(today));
 
         ImageView toggle = findViewById(R.id.toggle_menu);
         toggle.setElevation(0);
@@ -110,9 +115,8 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
     public List<Ride> fetchRides() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        //TODO: complete url string
         final String url = "https://ysv7zypxt5.execute-api.us-west-2.amazonaws.com/dev/rides?user_id="
-                + FirebaseAuth.getInstance().getUid() + "&datetime=" + "2020-06-15";
+                + FirebaseAuth.getInstance().getUid() + "&datetime=" + currDate;
 
 
         final List<Ride> rides = new ArrayList<>();
@@ -130,8 +134,8 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
                                 int distance = currentRide.getInt("distance");
                                 String duration = currentRide.getString("duration");
                                 String datetime = currentRide.getString("datetime");
-                                String userid = currentRide.getString("user_id");
-                                Ride ride = new Ride(earning,distance, duration, datetime, userid ,ride_id);
+                                String user_id = currentRide.getString("user_id");
+                                Ride ride = new Ride(earning,distance, duration, datetime, user_id ,ride_id);
                                 rides.add(ride);
                             }
                         } catch (JSONException e) {
@@ -164,8 +168,7 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public List<Ride> loadInBackground() {
-        List<Ride> result = fetchRides();
-        return result;
+        return fetchRides();
 
     }
 
@@ -181,11 +184,21 @@ public class MenuActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<List<Ride>> loader, List<Ride> rides) {
 
+        earning_tv_menu = findViewById(R.id.earnings_month_act_menu);
+        earning_tv_earn = findViewById(R.id.earnings_month_act_earning);
+        int earning = 0;
+        for(Ride ride : rides){
+            earning += ride.getEarning();
+        }
+        earning_tv_menu.setText("$" + earning);
+        earning_tv_earn.setText("$" + earning);
 
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
 
+        earning_tv_earn.setText("$0.00");
+        earning_tv_menu.setText("$0.00");
     }
 }
