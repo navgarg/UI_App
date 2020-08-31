@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class EarningsActivity extends AppCompatActivity {
 
@@ -21,5 +22,8 @@ public class EarningsActivity extends AppCompatActivity {
                 startActivity(new Intent(EarningsActivity.this, RideActivity.class));
             }
         });
+
+        TextView earning = findViewById(R.id.earnings_month_act_earning);
+        earning.setText(MenuActivity.text);
     }
 }

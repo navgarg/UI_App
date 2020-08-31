@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.AsyncTaskLoader;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,14 +57,20 @@ public class AddRide extends AppCompatActivity {
         earning = earn.getText().toString();
         duration = dur.getText().toString();
 
+        distance = "7";
+        earning = "300";
+        duration = "3h 4m";
+
+        Log.d("Values", distance + " - " + earning + " - " + duration + " - " + FirebaseAuth.getInstance().getUid());
+
         Button post = findViewById(R.id.post);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!(distance.equals("")) && !(earning.equals("")) && !(duration.equals(""))){
                     //TODO: kick off loader
-                    RideLoader loader = new RideLoader(AddRide.this);
-                    loader.loadInBackground();
+                    RideLoader rideLoader = new RideLoader();
+                    rideLoader.execute();
                 }
                 else{
                     Toast.makeText(AddRide.this, "Fill all fields", Toast.LENGTH_LONG).show();
@@ -99,19 +106,57 @@ public class AddRide extends AppCompatActivity {
 
 
     }
-    public class RideLoader extends AsyncTaskLoader<Void> {
+    public class RideLoader extends AsyncTask<Void, Void, Void> {
 
-        public RideLoader(Context context) {
-            super(context);
+        public RideLoader() {
+            super();
         }
 
-        @Override
-        protected void onStartLoading() {
-            forceLoad();
-        }
+//        @Override
+//        public Void loadInBackground() {
+//            RequestQueue queue = Volley.newRequestQueue(AddRide.this);
+//
+//            StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+//                    new Response.Listener<String>()
+//                    {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            Log.d("Response", response);
+//                        }
+//                    },
+//                    new Response.ErrorListener()
+//                    {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//                            Log.d("Error.Response", String.valueOf(error));
+//                        }
+//                    }
+//            ) {
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("trip_id", Integer.toString(int_random));
+//                    params.put("user_id", FirebaseAuth.getInstance().getUid());
+//                    params.put("distance", distance);
+//                    params.put("earning", earning);
+//                    params.put("datetime", currDate);
+//                    params.put("duration", duration);
+//                    return super.getParams();
+//                }
+//
+//                @Override
+//                public Map<String, String> getHeaders() throws AuthFailureError {
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("Content-Type", "application.json");
+//                    return params;
+//                }
+//            };
+//            queue.add(postRequest);
+//            return null;
+//        }
 
         @Override
-        public Void loadInBackground() {
+        protected Void doInBackground(Void... voids) {
             RequestQueue queue = Volley.newRequestQueue(AddRide.this);
 
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
