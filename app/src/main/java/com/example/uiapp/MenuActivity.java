@@ -92,18 +92,6 @@ public class MenuActivity extends AppCompatActivity {
 
         earning_tv_menu = findViewById(R.id.earnings_month_act_menu);
         earning_tv_earn = findViewById(R.id.earnings_month_act_earning);
-//
-//        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-//
-//        if(networkInfo != null && networkInfo.isConnected()) {
-//            //getLoaderManager().initLoader(1, null, (android.app.LoaderManager.LoaderCallbacks<Object>) this);
-//            RideAsyncTask.execute();
-//
-//        }else {
-//            Toast.makeText(MenuActivity.this, "No network found", Toast.LENGTH_LONG).show();
-//        }
 
         RideAsyncTask asyncTask = new RideAsyncTask();
         asyncTask.execute();
@@ -147,7 +135,7 @@ public class MenuActivity extends AppCompatActivity {
                             Log.d("MenuActivity: Earning", String.valueOf(earn));
                             text = "$" + Integer.toString(earn);
                             Log.d("text", text);
-                            earning_tv_menu.setText("text");
+                            earning_tv_menu.setText(text);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
