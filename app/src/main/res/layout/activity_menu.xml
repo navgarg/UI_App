@@ -117,7 +117,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add/delete ride"
+                    android:text="Add ride to server"
                     android:layout_marginTop="58dp"
                     android:layout_marginLeft="30dp"
                     android:textSize="12sp" />

@@ -17,6 +17,13 @@ public class Ride {
         mUserId = uid;
         mDatetime = datetime;
     }
+    public Ride(int earning, int distance, String duration, String datetime, String uid) {
+        mEarning = earning;
+        mDuration = duration;
+        mDistance = distance;
+        mUserId = uid;
+        mDatetime = datetime;
+    }
 
     public int getEarning() {
         return mEarning;

@@ -87,7 +87,7 @@ public class AddRide extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(AddRide.this);
             JSONObject jsonBodyObj = new JSONObject();
             try {
-                jsonBodyObj.put("trip_id", Integer.toString(int_random));
+                jsonBodyObj.put("ride_id", Integer.toString(int_random));
                 jsonBodyObj.put("user_id", FirebaseAuth.getInstance().getUid());
                 jsonBodyObj.put("distance", distance);
                 jsonBodyObj.put("earning", earning);

@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity {
 
     String currDate;
     public String currRideDate = "2000-01-01 00:00:00";
-    Ride currRide;
+    public static Ride currRide;
     public static String text;
     public static String curr_earn;
     TextView earning_tv_menu;
@@ -102,8 +102,10 @@ public class MenuActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         final String url = "https://ysv7zypxt5.execute-api.us-west-2.amazonaws.com/dev/rides?user_id="
-                + FirebaseAuth.getInstance().getUid() + "&datetime=" + "2020-06-01" + "00:00:00";
+                + FirebaseAuth.getInstance().getUid() + "&datetime=" + "2020-07-01" + "00:00:00";
         Log.d("URL", url);
+
+
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -120,12 +122,11 @@ public class MenuActivity extends AppCompatActivity {
                                 String duration = currentRide.getString("duration");
                                 String datetime = currentRide.getString("datetime");
                                 String user_id = currentRide.getString("user_id");
-                                Ride ride = new Ride(earning,distance, duration, datetime, user_id ,ride_id);
+                                Ride ride = new Ride(earning,distance, duration, datetime, user_id, ride_id);
                                 rides.add(ride);
 
                                 if(ride.getDatetime().compareTo(currRideDate) > 0){
                                     currRideDate = ride.getDatetime();
-                                    Log.d("Ride", "date" + currRideDate);
                                     currRide = ride;
                                 }
                             }
