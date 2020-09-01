@@ -74,31 +74,6 @@ public class AddRide extends AppCompatActivity {
                 }
             }
         });
-
-        Button delete = findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RequestQueue queue = Volley.newRequestQueue(AddRide.this);
-                StringRequest dr = new StringRequest(Request.Method.DELETE, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.d("Response", response);
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("Error.Response", String.valueOf(error));
-                            }
-                        }
-                );
-                queue.add(dr);
-            }
-        });
-
-
     }
 
     public class RideLoader extends AsyncTask<Void, Void, Void> {

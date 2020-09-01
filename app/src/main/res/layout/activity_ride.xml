@@ -74,6 +74,7 @@
                 android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
+                android:id="@+id/earn_ride"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

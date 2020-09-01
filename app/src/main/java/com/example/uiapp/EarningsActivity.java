@@ -25,5 +25,8 @@ public class EarningsActivity extends AppCompatActivity {
 
         TextView earning = findViewById(R.id.earnings_month_act_earning);
         earning.setText(MenuActivity.text);
+
+        TextView earn = findViewById(R.id.earnings_ride_act_earning);
+        earn.setText(MenuActivity.curr_earn);
     }
 }

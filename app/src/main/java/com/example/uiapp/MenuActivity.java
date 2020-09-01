@@ -39,11 +39,12 @@ import java.util.List;
 public class MenuActivity extends AppCompatActivity {
 
     String currDate;
+    public String currRideDate = "2000-01-01 00:00:00";
+    Ride currRide;
     public static String text;
+    public static String curr_earn;
     TextView earning_tv_menu;
-    TextView earning_tv_earn;
-    String date = "2000-01-01 00:00:00:";
-    public static String latestEarn;
+    public static final List<Ride> rides = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -91,10 +92,10 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         earning_tv_menu = findViewById(R.id.earnings_month_act_menu);
-        earning_tv_earn = findViewById(R.id.earnings_month_act_earning);
 
         RideAsyncTask asyncTask = new RideAsyncTask();
         asyncTask.execute();
+
     }
 
     public List<Ride> fetchRides() {
@@ -104,18 +105,15 @@ public class MenuActivity extends AppCompatActivity {
                 + FirebaseAuth.getInstance().getUid() + "&datetime=" + "2020-06-01" + "00:00:00";
         Log.d("URL", url);
 
-
-        final List<Ride> rides = new ArrayList<>();
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Log.d("Response: ", String.valueOf(response));
+                        Log.d("Response: ", String.valueOf(response));
                         try {
                             JSONArray items_array = response.getJSONArray("Items");
                             for (int i = 0; i < items_array.length(); i++) {
                                 JSONObject currentRide = items_array.getJSONObject(i);
-                                //Log.d("Object", String.valueOf(currentRide));
                                 int ride_id = currentRide.getInt("ride_id");
                                 int earning = currentRide.getInt("earning");
                                 int distance = currentRide.getInt("distance");
@@ -124,17 +122,20 @@ public class MenuActivity extends AppCompatActivity {
                                 String user_id = currentRide.getString("user_id");
                                 Ride ride = new Ride(earning,distance, duration, datetime, user_id ,ride_id);
                                 rides.add(ride);
-                            }
-                            //Log.d("Rides in onResponse", String.valueOf(rides));
 
+                                if(ride.getDatetime().compareTo(currRideDate) > 0){
+                                    currRideDate = ride.getDatetime();
+                                    Log.d("Ride", "date" + currRideDate);
+                                    currRide = ride;
+                                }
+                            }
+
+                            curr_earn = "$" + currRide.getEarning();
                             int earn = 0;
                             for(Ride currRide : rides){
                                 earn += currRide.getEarning();
                             }
-
-                            Log.d("MenuActivity: Earning", String.valueOf(earn));
                             text = "$" + Integer.toString(earn);
-                            Log.d("text", text);
                             earning_tv_menu.setText(text);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -150,7 +151,6 @@ public class MenuActivity extends AppCompatActivity {
         );
         queue.add(getRequest);
 
-        Log.d("Rides outside", String.valueOf(rides));
         return rides;
     }
 
